@@ -5,6 +5,12 @@
 npm install
 ```
 
+node version
+v16.14.0
+
+npm version
+8.4.1
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
