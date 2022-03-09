@@ -1,5 +1,9 @@
 <template>
-  <router-view/>
+  <div class="mt-12">
+    <div class="artboard">
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <style>
