@@ -1,70 +1,92 @@
 <template>
-  <h1>camera page</h1>
+  <div>
+    <h3 class="text-5xl font-bold text-indigo-500 animate-pulse">Camera</h3>
+    <div class="py-4">
+      <video
+        ref="videoEl"
+        autoplay="true"
+        playsinline
+        @loadedmetadata="detectFace"
+      />
+    </div>
+    <div class="btn" @click="previousPage">Back</div>
+  </div>
 </template>
 
 <script>
+//import * as faceAPI from 'face-api.js'
+import { reactive, ref, onMounted } from "vue";
+import * as faceAPI from "face-api.js";
+import router from "@/router";
+
 export default {
-  name: "CameraView",
-  components: {},
-  created() {},
-  methods: {
-    openCamera() {},
+  setup() {
+      const initParams = reactive({
+      modelUri: '/models',
+      option: new faceAPI.SsdMobilenetv1Options({ minConfidence: 0.5 })
+    })
+    const constraints = reactive({
+      video: {
+        width: {
+          min: 320,
+          ideal: 1280,
+          max: 1920,
+        },
+        height: {
+          min: 240,
+          ideal: 720,
+          max: 1080,
+        },
+        frameRate: {
+          min: 15,
+          ideal: 30,
+          max: 60,
+        },
+        facingMode: "environment",
+      },
+    });
+    const videoEl = ref(null);
 
-    createCameraElement() {
+    const previousPage = () => {
+      router.push("/");
+    };
 
-      const constraints = (window.constraints = {
-        audio: false,
-        video: true,
-      });
-
-      navigator.mediaDevices
-        .getUserMedia(constraints)
-        .then((stream) => {
-          this.isLoading = false;
-          this.$refs.camera.srcObject = stream;
-        })
-        .catch((error) => {
-          this.isLoading = false;
-          alert("May the browser didn't support or there is some errors.");
-        });
-    },
-
-    stopCameraStream() {
-      let tracks = this.$refs.camera.srcObject.getTracks();
-
-      tracks.forEach((track) => {
-        track.stop();
-      });
-    },
-
-    takePhoto() {
-      if (!this.isPhotoTaken) {
-        this.isShotPhoto = true;
-
-        const FLASH_TIMEOUT = 50;
-
-        setTimeout(() => {
-          this.isShotPhoto = false;
-        }, FLASH_TIMEOUT);
+    const detectFace = async () => {
+      const result = await faceAPI.detectAllFaces(videoEl.value);
+      if (result) {
+        console.log(result);
+        alert('face detected')
       }
-
-      this.isPhotoTaken = !this.isPhotoTaken;
-
-      const context = this.$refs.canvas.getContext("2d");
-      context.drawImage(this.$refs.camera, 0, 0, 450, 337.5);
-    },
-
-    downloadImage() {
-      const download = document.getElementById("downloadPhoto");
-      const canvas = document
-        .getElementById("photoTaken")
-        .toDataURL("image/jpeg")
-        .replace("image/jpeg", "image/octet-stream");
-      download.setAttribute("href", canvas);
-    },
+      setTimeout(() => detectFace());
+    };
+    onMounted(() => {
+        const initModel = async () => {
+        await faceAPI.nets.ssdMobilenetv1.loadFromUri(initParams.modelUri)
+        await faceAPI.nets.ageGenderNet.loadFromUri(initParams.modelUri)
+      }
+      /**
+       * startup webcam
+       * @function
+       */
+      const startStream = async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia(constraints);
+          videoEl.value.srcObject = stream;
+        } catch (error) {
+          console.error(error.message);
+        }
+      };
+        initModel()
+      startStream();
+    });
+    return {
+      videoEl,
+      previousPage,
+      detectFace
+    };
   },
 };
 </script>
 
-<style>
+<style scoped>
 </style>
