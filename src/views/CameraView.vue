@@ -71,8 +71,7 @@ export default {
         const addmore = '"' + newcanv + '"';
         var config = {
           headers: {
-            "Content-Type": "text/plain",
-            "Access-Control-Allow-Origin": "*"
+            "Content-Type": "text/plain",  
           },
         };
         const result = await axios.post(
