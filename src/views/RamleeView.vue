@@ -58,12 +58,7 @@
         </p>
       </div>
     </div>
-    <div>
-      <audio id="audio-player">
-        <source src="@/assets/audio/pramlee.mp3" type="audio/mpeg" />
-        Your browser does not support the audio tag.
-      </audio>
-    </div>
+    <div></div>
   </div>
 </template>
 
@@ -78,8 +73,11 @@ export default {
     const ramlee3 = ref(false);
     onMounted(() => {
       const playAudio = async () => {
-        var audio = document.getElementById("audio-player");
-        await audio.play();
+        const pramlee = require("@/assets/audio/pramlee.mp3");
+
+        let sound = new Audio(pramlee);
+
+        sound.play();
       };
 
       const stopAnimate = () => {
@@ -97,7 +95,7 @@ export default {
 
       const changeSlide2 = () => {
         setTimeout(() => {
-            ramlee2.value = false
+          ramlee2.value = false;
           ramlee3.value = true;
         }, 30000);
       };
