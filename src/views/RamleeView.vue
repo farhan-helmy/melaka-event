@@ -4,7 +4,11 @@
       <figure class="px-10 pt-10">
         <img src="@/assets/pramlee.jpg" alt="Shoes" class="rounded-xl" />
       </figure>
+
       <div class="card-body items-center text-center">
+        <div class="tooltip tooltip-open" data-tip="Powered by Amazon Polly">
+          <button class="btn btn-circle" @click="playAudio">Play</button>
+        </div>
         <h2 class="card-title">P. Ramlee</h2>
         <p>
           Tan Sri Datuk Amar Teuku Zakaria Bin Teuku Nyak Puteh (later Ramlee
@@ -71,15 +75,16 @@ export default {
     const ramlee1 = ref(true);
     const ramlee2 = ref(false);
     const ramlee3 = ref(false);
+
+    const playAudio = async () => {
+      const pramlee = require("@/assets/audio/pramlee.mp3");
+
+      let sound = new Audio(pramlee);
+      sound.type = "audio/mpeg";
+
+      sound.play();
+    };
     onMounted(() => {
-      const playAudio = async () => {
-        const pramlee = require("@/assets/audio/pramlee.mp3");
-
-        let sound = new Audio(pramlee);
-
-        sound.play();
-      };
-
       const stopAnimate = () => {
         setTimeout(() => {
           animation.value = false;
@@ -102,7 +107,6 @@ export default {
 
       stopAnimate();
       changeSlide();
-      playAudio();
       changeSlide2();
     });
 
@@ -111,6 +115,7 @@ export default {
       ramlee1,
       ramlee2,
       ramlee3,
+      playAudio,
     };
   },
 };
