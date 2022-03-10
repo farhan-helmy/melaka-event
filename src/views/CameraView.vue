@@ -8,6 +8,12 @@
         playsinline
         @loadedmetadata="detectFace"
       />
+      <canvas
+        id="photoTaken"
+        ref="canvasEl"
+        :width="350"
+        :height="250"
+      ></canvas>
     </div>
     <div class="btn" @click="previousPage">Back</div>
   </div>
@@ -18,13 +24,14 @@
 import { reactive, ref, onMounted } from "vue";
 import * as faceAPI from "face-api.js";
 import router from "@/router";
+import axios from "axios";
 
 export default {
   setup() {
-      const initParams = reactive({
-      modelUri: '/models',
-      option: new faceAPI.SsdMobilenetv1Options({ minConfidence: 0.5 })
-    })
+    const initParams = reactive({
+      modelUri: "/models",
+      option: new faceAPI.SsdMobilenetv1Options({ minConfidence: 0.5 }),
+    });
     const constraints = reactive({
       video: {
         width: {
@@ -46,24 +53,64 @@ export default {
       },
     });
     const videoEl = ref(null);
+    const canvasEl = ref(null);
 
-    const previousPage = () => {
+    const previousPage = async () => {
+      await endCamera();
       router.push("/");
     };
 
-    const detectFace = async () => {
-      const result = await faceAPI.detectAllFaces(videoEl.value);
-      if (result) {
-        console.log(result);
-        alert('face detected')
+    const takePhoto = async () => {
+      const context = canvasEl.value.getContext("2d");
+      context.drawImage(videoEl.value, 0, 0, 400, 275);
+      const canvas = String(document.getElementById("photoTaken").toDataURL())
+      //window.open(canvas);
+      const newcanv = canvas.replace('data:image/png;base64,', '')
+      console.log(newcanv);
+      const addmore = '"'+newcanv+'"'
+      var config = {
+        headers: {
+          "Content-Type": "text/plain",
+        },
+      };
+      const result = await axios.post(
+        "https://pel5kzx1ac.execute-api.ap-southeast-1.amazonaws.com/default/Rekognize",
+        addmore,
+        config
+      );
+      console.log(result.data);
+      if(result.data){
+          endCamera()
+          router.push('/pramlee')
       }
-      setTimeout(() => detectFace());
+      //console.log(result.data)
+    };
+
+    const endCamera = async () => {
+      let tracks = videoEl.value.srcObject.getTracks();
+
+      tracks.forEach((track) => {
+        track.stop();
+      });
+    };
+
+    const detectFace = async () => {
+      const results = await faceAPI.detectAllFaces(videoEl.value);
+
+      //console.log(result);
+
+      if (results) {
+        setTimeout(async () => {
+          await takePhoto();
+        }, 1000);
+      }
+      //await endCamera();
     };
     onMounted(() => {
-        const initModel = async () => {
-        await faceAPI.nets.ssdMobilenetv1.loadFromUri(initParams.modelUri)
-        await faceAPI.nets.ageGenderNet.loadFromUri(initParams.modelUri)
-      }
+      const initModel = async () => {
+        await faceAPI.nets.ssdMobilenetv1.loadFromUri(initParams.modelUri);
+        await faceAPI.nets.ageGenderNet.loadFromUri(initParams.modelUri);
+      };
       /**
        * startup webcam
        * @function
@@ -76,13 +123,15 @@ export default {
           console.error(error.message);
         }
       };
-        initModel()
+      initModel();
       startStream();
     });
     return {
       videoEl,
       previousPage,
-      detectFace
+      detectFace,
+      canvasEl,
+      takePhoto,
     };
   },
 };

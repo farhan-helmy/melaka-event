@@ -4,6 +4,7 @@ import {
 } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CameraView from '../views/CameraView.vue'
+import RamleeView from '../views/RamleeView.vue'
 const routes = [{
     path: '/',
     name: 'home',
@@ -13,6 +14,11 @@ const routes = [{
     path: '/camera',
     name: 'camera',
     component: CameraView
+  },
+  {
+    path: '/pramlee',
+    name: 'pramlee',
+    component: RamleeView
   },
   {
     path: '/about',

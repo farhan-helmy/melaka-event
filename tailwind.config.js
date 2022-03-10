@@ -1,12 +1,14 @@
 module.exports = {
   content: ['./public/**/*.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+
+    },
   },
   plugins: [
     require("daisyui")
   ],
   daisyui: {
-    themes:["synthwave"]
+    themes: ["synthwave"]
   }
 }
