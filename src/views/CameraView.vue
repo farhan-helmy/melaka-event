@@ -72,6 +72,7 @@ export default {
         var config = {
           headers: {
             "Content-Type": "text/plain",
+            "Access-Control-Allow-Origin": "*"
           },
         };
         const result = await axios.post(
