@@ -2,12 +2,7 @@
   <div>
     <h3 class="text-5xl font-bold text-indigo-500 animate-pulse">Camera</h3>
     <div class="py-4">
-      <video
-        ref="videoEl"
-        autoplay="true"
-        playsinline
-        @loadedmetadata="detectFace"
-      />
+      <video ref="videoEl" autoplay="true" playsinline />
       <canvas
         id="photoTaken"
         ref="canvasEl"
@@ -22,16 +17,11 @@
 <script>
 //import * as faceAPI from 'face-api.js'
 import { reactive, ref, onMounted } from "vue";
-import * as faceAPI from "face-api.js";
 import router from "@/router";
 import axios from "axios";
 
 export default {
   setup() {
-    const initParams = reactive({
-      modelUri: "/models",
-      option: new faceAPI.SsdMobilenetv1Options({ minConfidence: 0.5 }),
-    });
     const constraints = reactive({
       video: {
         width: {
@@ -60,32 +50,6 @@ export default {
       router.push("/");
     };
 
-    const takePhoto = async () => {
-      const context = canvasEl.value.getContext("2d");
-      context.drawImage(videoEl.value, 0, 0, 400, 275);
-      const canvas = String(document.getElementById("photoTaken").toDataURL())
-      //window.open(canvas);
-      const newcanv = canvas.replace('data:image/png;base64,', '')
-      console.log(newcanv);
-      const addmore = '"'+newcanv+'"'
-      var config = {
-        headers: {
-          "Content-Type": "text/plain",
-        },
-      };
-      const result = await axios.post(
-        "https://pel5kzx1ac.execute-api.ap-southeast-1.amazonaws.com/default/Rekognize",
-        addmore,
-        config
-      );
-      console.log(result.data);
-      if(result.data){
-          endCamera()
-          router.push('/pramlee')
-      }
-      //console.log(result.data)
-    };
-
     const endCamera = async () => {
       let tracks = videoEl.value.srcObject.getTracks();
 
@@ -94,22 +58,39 @@ export default {
       });
     };
 
-    const detectFace = async () => {
-      const results = await faceAPI.detectAllFaces(videoEl.value);
+    onMounted(() => {
+      const takePhoto = async () => {
+        const context = canvasEl.value.getContext("2d");
+        context.drawImage(videoEl.value, 0, 0, 400, 275);
+        const canvas = String(
+          document.getElementById("photoTaken").toDataURL()
+        );
+        //window.open(canvas);
+        const newcanv = canvas.replace("data:image/png;base64,", "");
+        console.log(newcanv);
+        const addmore = '"' + newcanv + '"';
+        var config = {
+          headers: {
+            "Content-Type": "text/plain",
+          },
+        };
+        const result = await axios.post(
+          "https://pel5kzx1ac.execute-api.ap-southeast-1.amazonaws.com/default/Rekognize",
+          addmore,
+          config
+        );
+        console.log(result.data);
+        if (result.data) {
+          endCamera();
+          router.push("/pramlee");
+        }
+        //console.log(result.data)
+      };
 
-      //console.log(result);
-
-      if (results) {
+      const countTakePhoto = () => {
         setTimeout(async () => {
           await takePhoto();
-        }, 1000);
-      }
-      //await endCamera();
-    };
-    onMounted(() => {
-      const initModel = async () => {
-        await faceAPI.nets.ssdMobilenetv1.loadFromUri(initParams.modelUri);
-        await faceAPI.nets.ageGenderNet.loadFromUri(initParams.modelUri);
+        }, 4000);
       };
       /**
        * startup webcam
@@ -123,15 +104,14 @@ export default {
           console.error(error.message);
         }
       };
-      initModel();
+
       startStream();
+      countTakePhoto()
     });
     return {
       videoEl,
       previousPage,
-      detectFace,
-      canvasEl,
-      takePhoto,
+      canvasEl
     };
   },
 };
