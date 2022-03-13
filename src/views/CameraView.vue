@@ -87,6 +87,13 @@ export default {
           endCamera();
           router.push("/pramlee");
         }
+        else if(result.data.Name === "Saloma"){
+          endCamera();
+          router.push("/saloma");
+        }else{
+          endCamera()
+          router.push("/no-detect")
+        }
         //console.log(result.data)
       };
 
