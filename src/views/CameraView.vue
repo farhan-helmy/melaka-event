@@ -80,7 +80,10 @@ export default {
           config
         );
         console.log(result.data);
-        if (result.data) {
+        if (result.data.Name === "No Data") {
+          endCamera();
+          router.push("/no-detect");
+        }else if(result.data.Name === "P Ramlee"){
           endCamera();
           router.push("/pramlee");
         }

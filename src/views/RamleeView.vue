@@ -44,7 +44,9 @@
       <figure class="px-10 pt-10">
         <img src="@/assets/pramlee3.jpg" alt="Shoes" class="rounded-xl" />
       </figure>
+      
       <div class="card-body items-center text-center">
+         <button class="btn btn-circle" @click="home">Home</button>
         <h2 class="card-title">P. Ramlee</h2>
         <p>
           Ramlee received his education from the Sekolah Melayu Kampung Jawa
@@ -68,6 +70,7 @@
 
 <script>
 import { onMounted, ref } from "vue";
+import router from '@/router';
 export default {
   name: "RamleeView",
   setup() {
@@ -77,13 +80,17 @@ export default {
     const ramlee3 = ref(false);
 
     const playAudio = async () => {
-      const pramlee = "https://puspanita-aws-poc.s3.ap-southeast-1.amazonaws.com/mp3/speech_20220309162400976.mp3?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLXNvdXRoZWFzdC0xIkcwRQIgPwBhLqVnaGc8B%2BS19aXJrCP8J%2FYd7vBRlKRMhxfLbhsCIQDjxn1w46SeeHJdTFKbv5q9Y961wfO8RLo2RwULOG93SCqEAwjt%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDExMjQzMzIxMjUyNyIMGjP0hmbNxG3ps1VwKtgCF6G9dtQ9Uy%2Fg8dzqGmJzcu%2FnBkutnw0Sp0BM%2Bw2JKs2iKLPWJidauUxClgs1vnJdS39rua5LNANVf1iZyYap7JXOeibLLgtEPmudzRk3y959zuyqRRNp20PWGnDchcXswEd5RL8RZGTDkJN7uiUzFVbspYAAdXuDPHtV5OqbaTXm7PQmSw6oextH0t%2BjycJU3D44%2B4GAlvkD2bXfluB1DQHXkqUx%2FHGY8eHkV4N6fQ4LZUVvSaHmYGfYSv7%2BII%2BlXhJWOI4NA0QUzZqQJYfq4TrhrQeIQ%2B8HwCqgQFE%2FwXUqSka2AEB%2ByHDgnO80nMk7KuO4n72dUutUYlgqRpPzVBq%2FtLnlJCIsN8stEIMXhdsdcFxQCbQxslYr20EN1PfBQHr8MZdEPFDPoIbzzCk9a1zEOtILGJCo9xCN0r7UlRkjKD3%2FA1goTV%2FOmnxqpbqHxLgeb%2BxSk4Iw9aKmkQY6swJ9oBfc%2Frfju87H6tLYHXRkWRYi6Yp2dUlXraywhIBWIpm5vJo6dday%2FQm0jJ%2FYQe%2BDg3waNfEpstBOfVjbGbl71%2Bm5a6wrGQoEzRkFdNT35qODQscOhchMliRmfzXnoNgXwfYEHEK844JYkVZtLbfX10Ojz6zCB3fdYhyeSAyZiuNWQUozP%2FAyGHLmtjNAXZVxQw%2FW%2FGKUE2ufE5tFjAlave5wMy9RFN44xHhlEFU1iKifJ4%2F%2B9PJVFfqUb1CQDTJyG6Aqp671At6PS2%2F%2FtUzx1TNPHCR8Q4tme9mJR1VD5fVE15O9axJFcvtML1z8ThTtOEtuH1%2FS%2FPEqBuby6pH5PTH0oRnCcyYmTV7cp3mlIFmxT234OuKTZd3BNetKH3gl8NF%2F42kjbRLTbdFwIypqKOUX&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220310T121612Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=ASIARULMKVRX3PHVVIXP%2F20220310%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Signature=23615126c3497fda3db30aa259860d1e251ceb67e32ab3d7f2e679e9a6b41d2b"
+      const pramlee = "https://puspanita-aws-poc.s3.ap-southeast-1.amazonaws.com/mp3/speech_20220309162400976.mp3?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLXNvdXRoZWFzdC0xIkcwRQIgV5kPXL8ggUqD8loaus4%2FkEelgoIywVu3QDR66BNJmDoCIQDoiZz14bQycx4B0V7yBSlAgOewQZ8YD0bKkVPWDmWU3Sr7Agg9EAAaDDExMjQzMzIxMjUyNyIMyImWnBYFGJRkpc89KtgCjJOHqg%2FhV5mZWPeVvUzxpAoqqMo%2BdVkmFj%2B365ugU8F%2B%2BmwcQaHzRqmTVp9P9CO0uqbIAqA8MIJvLtYadXoJ9OseY6nphvzgPx4f84hZ44tJEywRt8kuKhiEJfmdKw3nOYG4bAmYmFyRLz0J1VORXXPdn%2B9aAvQAgZ8ifAcTuWPJnNoW93VlIT96D%2BNWJWzauubvXiUXZBzqRdgszwN0A1GqcuFdCLYkY47awJiHJ2X7maScIvM9Cg%2F0CB9HvjiGnmYO2cAj8CbAlAI33107ai8vcp1fyWSu%2BtETYiDdzss%2BqPiyy%2F66IS1DeAEgR%2BpptvhJfrxaYP9TJoQSu1dsacy1NhXKgh10JEWK%2F68JEqrhUpmcMZQvUdy1KzBtDFCzgYK1ziyt766S%2FNWb0uzf8PW7ql7ktHuJylmGkTGUkvcXv%2BbQHkerP%2Bbbd46Ko9X49mifFofcfqcwyt21kQY6swKWSf6hTQmCLttn5BytAZYBkGE28qAkonw9pMu6A2F7zcAlTvRQxhZ7ss274c%2BfJqqQiVZD4QNQSS8YCahQh7V%2FbERgT%2Fwa2P9ziXmBjmr%2Fs8iFldyEBqjbcK6BGkfDCA5GD3GHO1j1yywnFVTIvooKoXDo2M9si9XU6COOoJi4YaSgu8DpfE5txHeGA4anXeTBMX3%2FTyBCWd%2FYEN%2B6NfGYz6GUJqX4%2B41L7vHNI93XoMiSZ2oK4ZKC7szUX1wd1z%2FfMPg8%2FgVGL9CKwH5vlQJsrqjBEFEva9%2BkWAJGVqizadg0fSg406qBmOT%2FbIoJOIQENyAwF%2BsCpsm4ImXngShPaPPt5Hr6q%2FwGyVJKLc3PFnaFfmGXPUWNPgzB0oiGDMVr0WohcZOtrmxKObBbhseVVoXm&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220313T041134Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=ASIARULMKVRXYLTQXC5R%2F20220313%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Signature=6d100c2b67bc619dd7500b48b8bcf1636679fb4b34412ea55817c00d2cf2e119"
 
       let sound = new Audio(pramlee);
       sound.type = "audio/mpeg";
 
       sound.play();
     };
+
+    const home = async () => {
+      router.push("/")
+    }
     onMounted(() => {
       const stopAnimate = () => {
         setTimeout(() => {
@@ -116,6 +123,7 @@ export default {
       ramlee2,
       ramlee3,
       playAudio,
+      home
     };
   },
 };

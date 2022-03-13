@@ -5,6 +5,7 @@ import {
 import HomeView from '../views/HomeView.vue'
 import CameraView from '../views/CameraView.vue'
 import RamleeView from '../views/RamleeView.vue'
+import NoDetect from '../views/NoDetect.vue'
 const routes = [{
     path: '/',
     name: 'home',
@@ -19,6 +20,16 @@ const routes = [{
     path: '/pramlee',
     name: 'pramlee',
     component: RamleeView
+  },
+  {
+    path: '/pramlee',
+    name: 'pramlee',
+    component: RamleeView
+  },
+  {
+    path: '/no-detect',
+    name: 'nodetect',
+    component: NoDetect
   },
   {
     path: '/about',
