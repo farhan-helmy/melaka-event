@@ -61,7 +61,7 @@ export default {
     onMounted(() => {
       const takePhoto = async () => {
         const context = canvasEl.value.getContext("2d");
-        context.drawImage(videoEl.value, 0, 0, 400, 275);
+        context.drawImage(videoEl.value, 0, 0, 400, 325);
         const canvas = String(
           document.getElementById("photoTaken").toDataURL()
         );
