@@ -20,6 +20,10 @@
           Harris and blessed with two (2) sons, Nasir and Arfan but divorced in
           1953.
         </p>
+         <p>
+          Sumber:
+        </p>
+         <img src="@/assets/logoarkib.png" alt="Shoes" class="rounded-xl object-scale-down h-48 w-96" />
       </div>
     </div>
     <div v-if="ramlee2" class="card w-96 bg-base-100 shadow-xl">
@@ -37,6 +41,10 @@
           actor in "Chinta”. His third spouse was Salmah binti Ismail (Saloma)
           without child.
         </p>
+         <p>
+          Sumber:
+        </p>
+         <img src="@/assets/logoarkib.png" alt="Shoes" class="rounded-xl object-scale-down h-48 w-96" />
       </div>
     </div>
     <div v-if="ramlee3" class="card w-96 bg-base-100 shadow-xl">
@@ -56,6 +64,10 @@
           Kebesaran Darjah Panglima Setia Mahkota (PSM) which carries the
           honorific title of Tan Sri.
         </p>
+         <p>
+          Sumber:
+        </p>
+         <img src="@/assets/logoarkib.png" alt="Shoes" class="rounded-xl object-scale-down h-48 w-96" />
       </div>
     </div>
     <div></div>
@@ -97,14 +109,14 @@ export default {
         setTimeout(() => {
           ramlee1.value = false;
           ramlee2.value = true;
-        }, 20000);
+        }, 5000);
       };
 
       const changeSlide2 = () => {
         setTimeout(() => {
           ramlee2.value = false;
           ramlee3.value = true;
-        }, 30000);
+        }, 10000);
       };
 
       stopAnimate();

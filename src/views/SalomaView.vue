@@ -18,6 +18,10 @@
           but then divorced. They were blessed with a son, Armali. She married
           P.Ramlee on 31 October 1961.
         </p>
+        <p>
+          Sumber:
+        </p>
+         <img src="@/assets/logoarkib.png" alt="Shoes" class="rounded-xl object-scale-down h-48 w-96" />
       </div>
     </div>
     <div v-if="saloma2" class="card w-96 bg-base-100 shadow-xl">
@@ -34,6 +38,10 @@
           1974. She was recognised as the First National Songbird by the
           Association of Homeland Singers, Musicians and Songwriters (PAPITA).
         </p>
+         <p>
+          Sumber:
+        </p>
+         <img src="@/assets/logoarkib.png" alt="Shoes" class="rounded-xl object-scale-down h-48 w-96" />
       </div>
     </div>
     <div v-if="saloma3" class="card w-96 bg-base-100 shadow-xl">
@@ -49,6 +57,10 @@
           age of 48 due to liver failure caused by jaundice and was buried at
           the Jalan Ampang Muslim Cemetery, Kuala Lumpur.
         </p>
+         <p>
+          Sumber:
+        </p>
+         <img src="@/assets/logoarkib.png" alt="Shoes" class="rounded-xl object-scale-down h-48 w-96" />
       </div>
     </div>
     <div></div>
@@ -91,14 +103,14 @@ export default {
         setTimeout(() => {
           saloma1.value = false;
           saloma2.value = true;
-        }, 20000);
+        }, 5000);
       };
 
       const changeSlide2 = () => {
         setTimeout(() => {
           saloma2.value = false;
           saloma3.value = true;
-        }, 30000);
+        }, 10000);
       };
 
       stopAnimate();

@@ -5,7 +5,7 @@
 
     <div class="swap-on">
       <div class="w-32">
-        <img src="@/assets/logo2.png" alt="">
+        <img src="@/assets/logo2.png" alt="" />
       </div>
     </div>
 
@@ -18,6 +18,13 @@
   <h3 class="text-5xl font-bold text-indigo-500 animate-pulse">Puspanita</h3>
 
   <div class="btn" @click="nextPage()">Click to start</div>
+
+  <p>By:</p>
+  <img
+    src="@/assets/logoarkib.png"
+    alt="Shoes"
+    class="rounded-xl object-scale-down h-48 w-96"
+  />
 </template>
 
 <script>
