@@ -7,7 +7,7 @@
         id="photoTaken"
         ref="canvasEl"
         :width="350"
-        :height="250"
+        :height="350"
       ></canvas>
     </div>
     <div class="btn" @click="previousPage">Back</div>
