@@ -9,6 +9,7 @@
         <div class="tooltip tooltip-open" data-tip="Powered by Amazon Polly">
           <button class="btn btn-circle" @click="playAudio">Play</button>
         </div>
+        <button class="btn" @click="home">Home</button>
         <h2 class="card-title">P. Ramlee</h2>
         <p>
           P.Ramlee was born on 22 March 1929 (Wednesday) / 10 Syawal 1347H at
@@ -26,6 +27,7 @@
         <img src="@/assets/pramlee2.jpg" alt="Shoes" class="rounded-xl" />
       </figure>
       <div class="card-body items-center text-center">
+        <button class="btn" @click="home">Home</button>
         <h2 class="card-title">P. Ramlee</h2>
         <p>
           He won 2nd place in the North Malaya Keroncong Competition. He was a
@@ -46,18 +48,13 @@
         <button class="btn btn-circle" @click="home">Home</button>
         <h2 class="card-title">P. Ramlee</h2>
         <p>
-          Ramlee received his education from the Sekolah Melayu Kampung Jawa
-          (Kampung Jawa Malay School), Francis Light English School and then to
-          Penang Free School; in all he was registered as "Ramlee" by his
-          father, because his name Teuku Zakaria was not suitable with other
-          children at that time. Reportedly a reluctant and naughty student,
-          Ramlee was nevertheless talented and interested in music and football.
-          His studies at the Penang Free School were interrupted by the Japanese
-          occupation from 1942 to 1945, during which he enrolled in the Japanese
-          navy school (Kaigun Gakko). He also learnt the basics of music and to
-          sing Japanese songs during this period with his teacher known as
-          Hirahe-san. When the war ended, he took music lessons that enabled him
-          to read musical notations.[3]
+          He was awarded the Ahli Mangku Negara (AMN) Medal. He moved from
+          Singapore to Kuala Lumpur to carry on his career in entertainment at
+          the Merdeka Studio, Hulu Kelang, Kuala Lumpur. On 29 May 1973, he died
+          at the age of 44 from a heart attack and was buried at Jalan Ampang
+          Muslim Cemetery, Kuala Lumpur. He was posthumously awarded the Bintang
+          Kebesaran Darjah Panglima Setia Mahkota (PSM) which carries the
+          honorific title of Tan Sri.
         </p>
       </div>
     </div>
