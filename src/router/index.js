@@ -6,7 +6,8 @@ import HomeView from '../views/HomeView.vue'
 import CameraView from '../views/CameraView.vue'
 import RamleeView from '../views/RamleeView.vue'
 import NoDetect from '../views/NoDetect.vue'
-import SalomaView from '../views/SalomaView.vue'
+import MatKilauView from '../views/MatKilauView.vue'
+
 const routes = [{
     path: '/',
     name: 'home',
@@ -18,14 +19,14 @@ const routes = [{
     component: CameraView
   },
   {
+    path: '/mat-kilau',
+    name: 'matkilau',
+    component: MatKilauView
+  },
+  {
     path: '/pramlee',
     name: 'pramlee',
     component: RamleeView
-  },
-  {
-    path: '/saloma',
-    name: 'saloma',
-    component: SalomaView
   },
   {
     path: '/no-detect',

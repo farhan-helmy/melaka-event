@@ -1,9 +1,9 @@
 <template>
   <div>
     <div v-if="ramlee1" class="card w-96 bg-base-100 shadow-xl">
-      <figure class="px-10 pt-10">
+      <!-- <figure class="px-10 pt-10">
         <img src="@/assets/pramlee.jpg" alt="Shoes" class="rounded-xl" />
-      </figure>
+      </figure> -->
 
       <div class="card-body items-center text-center">
         <div class="tooltip tooltip-open" data-tip="Powered by Amazon Polly">
@@ -23,13 +23,13 @@
          <p>
           Sumber:
         </p>
-         <img src="@/assets/logoarkib.png" alt="Shoes" class="rounded-xl object-scale-down h-48 w-96" />
+        
       </div>
     </div>
     <div v-if="ramlee2" class="card w-96 bg-base-100 shadow-xl">
-      <figure class="px-10 pt-10">
+      <!-- <figure class="px-10 pt-10">
         <img src="@/assets/pramlee2.jpg" alt="Shoes" class="rounded-xl" />
-      </figure>
+      </figure> -->
       <div class="card-body items-center text-center">
         <button class="btn" @click="home">Home</button>
         <h2 class="card-title">P. Ramlee</h2>
@@ -44,13 +44,13 @@
          <p>
           Sumber:
         </p>
-         <img src="@/assets/logoarkib.png" alt="Shoes" class="rounded-xl object-scale-down h-48 w-96" />
+         
       </div>
     </div>
     <div v-if="ramlee3" class="card w-96 bg-base-100 shadow-xl">
-      <figure class="px-10 pt-10">
+      <!-- <figure class="px-10 pt-10">
         <img src="@/assets/pramlee3.jpg" alt="Shoes" class="rounded-xl" />
-      </figure>
+      </figure> -->
 
       <div class="card-body items-center text-center">
         <button class="btn btn-circle" @click="home">Home</button>
@@ -67,7 +67,7 @@
          <p>
           Sumber:
         </p>
-         <img src="@/assets/logoarkib.png" alt="Shoes" class="rounded-xl object-scale-down h-48 w-96" />
+         
       </div>
     </div>
     <div></div>
