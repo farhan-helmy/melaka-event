@@ -71,7 +71,7 @@ export default {
         const addmore = '"' + newcanv + '"';
         var config = {
           headers: {
-            "Content-Type": "text/plain",  
+            "Content-Type": "text/plain",
           },
         };
         const result = await axios.post(
@@ -83,16 +83,12 @@ export default {
         if (result.data.Name === "No Data") {
           endCamera();
           router.push("/no-detect");
-        }else if(result.data.Name === "P Ramlee"){
+        } else if (result.data.Name === "Mat Kilau") {
           endCamera();
-          router.push("/pramlee");
-        }
-        else if(result.data.Name === "Saloma"){
+          router.push("/mat-kilau");
+        } else {
           endCamera();
-          router.push("/saloma");
-        }else{
-          endCamera()
-          router.push("/no-detect")
+          router.push("/no-detect");
         }
         //console.log(result.data)
       };
@@ -116,12 +112,12 @@ export default {
       };
 
       startStream();
-      countTakePhoto()
+      countTakePhoto();
     });
     return {
       videoEl,
       previousPage,
-      canvasEl
+      canvasEl,
     };
   },
 };
