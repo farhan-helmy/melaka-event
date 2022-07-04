@@ -1,14 +1,14 @@
 <template>
   <div>
     <div v-if="ramlee1" class="card w-96 bg-base-100 shadow-xl">
-      <!-- <figure class="px-10 pt-10">
-        <img src="@/assets/pramlee.jpg" alt="Shoes" class="rounded-xl" />
-      </figure> -->
+      <figure class="px-10 pt-10">
+        <img src="@/assets/mat-kilau-4.jpeg" alt="Shoes" class="rounded-xl" />
+      </figure>
 
       <div class="card-body items-center text-center">
-        <div class="tooltip tooltip-open" data-tip="Powered by Amazon Polly">
+        <!-- <div class="tooltip tooltip-open" data-tip="Powered by Amazon Polly">
           <button class="btn btn-circle" @click="playAudio">Play</button>
-        </div>
+        </div> -->
         <button class="btn" @click="home">Home</button>
         <h2 class="card-title">Mat Kilau</h2>
         <p>
